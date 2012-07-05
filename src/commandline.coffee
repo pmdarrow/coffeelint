@@ -199,7 +199,7 @@ reportAndExit = (errorReport, options) ->
         ReporterClass = Reporter
     reporter = new ReporterClass(errorReport)
     reporter.publish()
-    process.exit(errorReport.getExitCode())
+    #process.exit(errorReport.getExitCode())
 
 # Declare command line options.
 options = optimist
@@ -222,13 +222,13 @@ options = optimist
 
 if options.argv.v
     console.log coffeelint.VERSION
-    process.exit(0)
+    #process.exit(0)
 else if options.argv.h
     options.showHelp()
-    process.exit(0)
+    #process.exit(0)
 else if options.argv._.length < 1 and not options.argv.s
     options.showHelp()
-    process.exit(1)
+    #process.exit(1)
 else
     # Load configuration.
     configPath = options.argv.f
