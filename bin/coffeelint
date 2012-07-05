@@ -301,21 +301,17 @@ CoffeeLint is freely distributable under the MIT license.
       ReporterClass = Reporter;
     }
     reporter = new ReporterClass(errorReport);
-    reporter.publish();
-    return process.exit(errorReport.getExitCode());
+    return reporter.publish();
   };
 
   options = optimist.usage("Usage: coffeelint [options] source [...]").alias("f", "file").alias("h", "help").alias("v", "version").alias("s", "stdin").describe("f", "Specify a custom configuration file.").describe("h", "Print help information.").describe("v", "Print current version number.").describe("r", "Recursively lint .coffee files in subdirectories.").describe("csv", "Use the csv reporter.").describe("jslint", "Use the JSLint XML reporter.").describe("s", "Lint the source from stdin").boolean("csv").boolean("jshint").boolean("r").boolean("s");
 
   if (options.argv.v) {
     console.log(coffeelint.VERSION);
-    process.exit(0);
   } else if (options.argv.h) {
     options.showHelp();
-    process.exit(0);
   } else if (options.argv._.length < 1 && !options.argv.s) {
     options.showHelp();
-    process.exit(1);
   } else {
     configPath = options.argv.f;
     config = configPath ? JSON.parse(read(configPath)) : {};
